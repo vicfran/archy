@@ -8,7 +8,16 @@ class Archy(context: Context) {
 
     init {
         Realm.init(context)
-        Realm.setDefaultConfiguration(RealmConfiguration.Builder().build())
+        Realm.setDefaultConfiguration(RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build())
     }
 
+}
+
+fun ArchyModel.save() {
+    Realm.getDefaultInstance().let {
+        it.executeTransaction {
+            it.copyToRealm(this@save)
+        }
+        it.close()
+    }
 }

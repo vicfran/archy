@@ -2,6 +2,8 @@ package io.github.vicfran.archy
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import io.github.vicfran.archy.model.Cat
+import io.github.vicfran.lib.save
 
 class MainActivity : AppCompatActivity() {
 
@@ -9,4 +11,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+
+    override fun onResume() {
+        super.onResume()
+        save()
+    }
+
+    private fun save() {
+        Cat("Newton").save()
+    }
+
 }
