@@ -20,17 +20,27 @@ fun RealmModel.saveOrUpdate() {
     }
 }
 
-private fun realm() = try {
+inline fun <reified T : RealmModel> allOf(): Either<Exception, List<T>> {
+    return realm().fold({
+        Left(Exception())
+    }, {
+        realm -> with (realm) {
+            Right(copyFromRealm(where(T::class.java).findAll()))
+        }
+    })
+}
+
+fun realm() = try {
     val defaultInstance = Realm.getDefaultInstance()
     Right(defaultInstance)
 } catch (e: Exception) {
     Left(e)
 }
 
-private fun RealmModel.hasPrimaryKey() = objectSchema().fold({ false }, { it.hasPrimaryKey() })
+private fun <T : RealmModel> hasSchema(clazz: T) = realm().fold({ false }, { clazz.objectSchema() != null ?: false})
 
 private fun RealmModel.objectSchema() = realm().fold( { Left(Exception()) }, { it.schema.getSafe(this) })
 
-private fun <T : RealmModel> hasSchema(clazz: T) = realm().fold({ false }, { clazz.objectSchema() != null ?: false})
+private fun RealmModel.hasPrimaryKey() = objectSchema().fold({ false }, { it.hasPrimaryKey() })
 
 private fun <T: RealmModel> RealmSchema.getSafe(clazz: T) = get(clazz.javaClass.simpleName)?.let { Right(it) } ?: Left(Exception())
