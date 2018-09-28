@@ -22,4 +22,6 @@ sealed class Either<out L, out R> {
 
     inline fun <C> map(f: (R) -> C): Either<L, C> = fold({ Left(it) }, { Right(f(it))})
 
+    fun getOrNull(): R? = fold({ null }, { it })
+
 }

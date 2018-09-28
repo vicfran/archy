@@ -19,7 +19,6 @@ import org.junit.runner.RunWith
     }
 
     @After fun tearDown() {
-        realm.deleteAll()
         realm.close()
     }
 
@@ -29,8 +28,24 @@ import org.junit.runner.RunWith
 
     @Test fun given_a_cat_when_finding_it_then_it_returns() {
         givenCat.save()
-        val response = allOf<Cat>()
-        assertTrue(response.isRight())
+        val cats = allOf<Cat>()
+        assertTrue(cats.isRight())
+        val theCat = cats.map { it.first() }.getOrNull()
+        assertTrue(theCat?.assert() ?: false)
+    }
+
+    @Test fun given_realm_object_when_delete_all_then_realm_is_empty() {
+        with (givenCat) {
+            save()
+            save()
+            save()
+        }
+        assertTrue(allOf<Cat>().isRight())
+        assertTrue(allOf<Cat>().map { it.isNotEmpty() }.getOrNull() ?: false)
+
+        deleteAllFromRealm()
+        assertTrue(allOf<Cat>().isRight())
+        assertTrue(allOf<Cat>().map { it.isEmpty() }.getOrNull() ?: false)
     }
 
 

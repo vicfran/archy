@@ -30,6 +30,10 @@ inline fun <reified T : RealmModel> allOf(): Either<Exception, List<T>> {
     })
 }
 
+fun deleteAllFromRealm(): Either<Exception, Unit> = realm().map { realm -> with (realm) { executeTransaction {
+    deleteAll()
+} } }
+
 fun realm() = try {
     val defaultInstance = Realm.getDefaultInstance()
     Right(defaultInstance)
