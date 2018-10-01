@@ -61,6 +61,12 @@ import org.junit.runner.RunWith
         assertThreeCats()
     }
 
+    @Test fun given_realm_object_when_getting_by_first_then_return_it() {
+        givenCat.save()
+
+        firstOf<Cat>().map { it.assert() }
+    }
+
     private fun assertThreeCats() {
         assertTrue(allOf<Cat>().isRight())
         assertTrue(allOf<Cat>().map { it.isNotEmpty() }.getOrNull() ?: false)

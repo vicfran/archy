@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import io.github.vicfran.archy.model.CatRealmModel
 import io.github.vicfran.archy.model.CatRealmObject
 import io.github.vicfran.lib.allOf
+import io.github.vicfran.lib.firstOf
 import io.github.vicfran.lib.save
 import io.github.vicfran.lib.saveOrUpdate
 import io.realm.RealmList
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun find() {
         allOf<CatRealmModel>()
+        firstOf<CatRealmModel>()
     }
 
 }

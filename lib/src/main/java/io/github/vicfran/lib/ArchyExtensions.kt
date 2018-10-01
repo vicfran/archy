@@ -34,8 +34,16 @@ fun RealmModel.saveOrUpdate() {
 }
 
 inline fun <reified T : RealmModel> allOf(): Either<Exception, List<T>> = realm().map{ realm -> with (realm) {
-    copyFromRealm(where(T::class.java).findAll()) }
-}
+    val result = copyFromRealm(where(T::class.java).findAll())
+    close()
+    result
+} }
+
+inline fun <reified T : RealmModel> firstOf(): Either<Exception, T> = realm().map { realm -> with (realm) {
+    val result = copyFromRealm(where(T::class.java).findFirst()!!)
+    close()
+    result
+} }
 
 fun deleteAllFromRealm(): Either<Exception, Unit> = realm().map { realm -> with (realm) { executeTransaction {
     deleteAll() } }
