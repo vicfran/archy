@@ -20,15 +20,9 @@ fun RealmModel.saveOrUpdate() {
     }
 }
 
-inline fun <reified T : RealmModel> allOf(): Either<Exception, List<T>> {
-    return realm().fold({
-        Left(Exception())
-    }, {
-        realm -> with (realm) {
-            Right(copyFromRealm(where(T::class.java).findAll()))
-        }
-    })
-}
+inline fun <reified T : RealmModel> allOf(): Either<Exception, List<T>> = realm().map{ realm -> with (realm) {
+    copyFromRealm(where(T::class.java).findAll())
+    } }
 
 fun deleteAllFromRealm(): Either<Exception, Unit> = realm().map { realm -> with (realm) { executeTransaction {
     deleteAll()
