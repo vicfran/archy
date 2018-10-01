@@ -3,6 +3,7 @@ package io.github.vicfran.lib
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import io.realm.Realm
+import io.realm.RealmList
 import org.junit.After
 import org.junit.Assert.assertTrue
 import org.junit.Before
@@ -40,12 +41,30 @@ import org.junit.runner.RunWith
             save()
             save()
         }
-        assertTrue(allOf<Cat>().isRight())
-        assertTrue(allOf<Cat>().map { it.isNotEmpty() }.getOrNull() ?: false)
+
+        assertThreeCats()
 
         deleteAllFromRealm()
         assertTrue(allOf<Cat>().isRight())
         assertTrue(allOf<Cat>().map { it.isEmpty() }.getOrNull() ?: false)
+    }
+
+    @Test fun given_list_of_realm_objects_when_saving_all_then_they_are_saved_successfully() {
+        listOf(givenCat, givenCat, givenCat).save()
+
+        assertThreeCats()
+    }
+
+    @Test fun given_realm_list_of_realm_objects_when_saving_all_then_they_are_saved_successfully() {
+        RealmList(givenCat, givenCat, givenCat).save()
+
+        assertThreeCats()
+    }
+
+    private fun assertThreeCats() {
+        assertTrue(allOf<Cat>().isRight())
+        assertTrue(allOf<Cat>().map { it.isNotEmpty() }.getOrNull() ?: false)
+        assertTrue(3 == allOf<Cat>().getOrNull()?.size)
     }
 
 

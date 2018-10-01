@@ -3,11 +3,24 @@ package io.github.vicfran.lib
 import io.github.vicfran.lib.Either.Left
 import io.github.vicfran.lib.Either.Right
 import io.realm.Realm
+import io.realm.RealmList
 import io.realm.RealmModel
 import io.realm.RealmSchema
 
 fun RealmModel.save() {
-    realm().map { realm -> with(realm) { executeTransaction { copyToRealm(this@save) }
+    realm().map { realm -> with(realm) { executeTransaction { copyToRealmOrUpdate(this@save) }
+        close() }
+    }
+}
+
+fun <T: RealmModel> List<T>.save() {
+    realm().map { realm -> with (realm) { executeTransaction { copyToRealmOrUpdate(this@save) }
+        close() }
+    }
+}
+
+fun <T: RealmList<RealmModel>> T.save() {
+    realm().map { realm -> with (realm) { executeTransaction { copyToRealmOrUpdate(this@save) }
         close() }
     }
 }
@@ -21,12 +34,12 @@ fun RealmModel.saveOrUpdate() {
 }
 
 inline fun <reified T : RealmModel> allOf(): Either<Exception, List<T>> = realm().map{ realm -> with (realm) {
-    copyFromRealm(where(T::class.java).findAll())
-    } }
+    copyFromRealm(where(T::class.java).findAll()) }
+}
 
 fun deleteAllFromRealm(): Either<Exception, Unit> = realm().map { realm -> with (realm) { executeTransaction {
-    deleteAll()
-} } }
+    deleteAll() } }
+}
 
 fun realm() = try {
     val defaultInstance = Realm.getDefaultInstance()

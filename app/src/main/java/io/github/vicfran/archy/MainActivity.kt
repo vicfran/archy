@@ -5,7 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import io.github.vicfran.archy.model.CatRealmModel
 import io.github.vicfran.archy.model.CatRealmObject
 import io.github.vicfran.lib.allOf
+import io.github.vicfran.lib.save
 import io.github.vicfran.lib.saveOrUpdate
+import io.realm.RealmList
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,8 +23,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun save() {
-        CatRealmModel("Newton").saveOrUpdate()
-        CatRealmObject("Einstein").saveOrUpdate()
+        val newton = CatRealmModel("Newton")
+        newton.saveOrUpdate()
+        val einstein = CatRealmObject("Einstein")
+        einstein.saveOrUpdate()
+        listOf(newton, einstein).save()
+        RealmList(newton, einstein).save()
     }
 
     private fun find() {
