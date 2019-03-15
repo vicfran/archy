@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
     }
 
     @After fun tearDown() {
-        realm.close()
+        deleteAllFromRealm()
     }
 
     @Test fun given_a_cat_when_saving_it_then_it_is_saved_successfully() {
@@ -50,13 +50,20 @@ import org.junit.runner.RunWith
     }
 
     @Test fun given_list_of_realm_objects_when_saving_all_then_they_are_saved_successfully() {
-        listOf(givenCat, givenCat, givenCat).save()
+        listOf(
+            Cat("Newton", 4.5f, 2, false),
+            Cat("Copernico", 8.5f, 2, true),
+            Cat("Einstein", 5.5f, 2, false)
+        ).save()
 
         assertThreeCats()
     }
 
     @Test fun given_realm_list_of_realm_objects_when_saving_all_then_they_are_saved_successfully() {
-        RealmList(givenCat, givenCat, givenCat).save()
+        RealmList(
+            Cat("Newton", 4.5f, 2, false),
+            Cat("Copernico", 8.5f, 2, true),
+            Cat("Einstein", 5.5f, 2, false)).save()
 
         assertThreeCats()
     }
@@ -65,6 +72,30 @@ import org.junit.runner.RunWith
         givenCat.save()
 
         firstOf<Cat>().map { it.assert() }
+    }
+
+    @Test fun given_realm_object_query_it_by_string_field() {
+        givenCat.save()
+
+        firstOf<Cat>("name", "Newton").map { it.assert() }
+    }
+
+    @Test fun given_realm_object_query_it_by_float_field() {
+        givenCat.save()
+
+        firstOf<Cat>("age", 4.5f).map { it.assert() }
+    }
+
+    @Test fun given_realm_object_query_it_by_int_field() {
+        givenCat.save()
+
+        firstOf<Cat>("eyes", 2).map { it.assert() }
+    }
+
+    @Test fun given_realm_object_query_it_by_boolean_field() {
+        givenCat.save()
+
+        firstOf<Cat>("isOld", false).map { it.assert() }
     }
 
     private fun assertThreeCats() {
