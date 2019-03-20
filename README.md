@@ -6,7 +6,7 @@
 
 ## Using alpha versions
 
-If you are brave enough to follow alpha development of archy that has not been packaged in an official release yet, you can use a **-alpha** release of the current development version of archy via Gradle, available on [JitPack](https://jitpack.io/#vicfran/archy)
+If you are brave enough to follow alpha development of archy that has not been packaged in an official release yet, you can use a **-alpha** release of the current development version of archy via [Gradle](https://gradle.org/), available on [JitPack](https://jitpack.io/#vicfran/archy)
 
 ```
 allprojects {
