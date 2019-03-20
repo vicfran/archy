@@ -1,5 +1,5 @@
 # archy
-Realm extensions written in Kotlin
+archy is a lightweight library which uses [kotlin extension functions](https://kotlinlang.org/docs/reference/extensions.html) to make the use of [Realm](https://realm.io/) more easy and secure, and fun! :rocket:
 
 [![Build Status](https://travis-ci.com/vicfran/archy.svg?branch=dev)](https://travis-ci.com/vicfran/archy)
 
