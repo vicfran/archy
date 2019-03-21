@@ -1,8 +1,5 @@
-# archy
-:rocket: archy is a lightweight library which uses [kotlin extension functions](https://kotlinlang.org/docs/reference/extensions.html) to make the use of [Realm](https://realm.io/) more easy and secure, and fun!
-
-[![Build Status](https://travis-ci.com/vicfran/archy.svg?branch=dev)](https://travis-ci.com/vicfran/archy)
-[![Release](https://jitpack.io/v/vicfran/archy.svg)](https://jitpack.io/#vicfran/archy)
+# archy [![Build Status](https://travis-ci.com/vicfran/archy.svg?branch=dev)](https://travis-ci.com/vicfran/archy) [![Release](https://jitpack.io/v/vicfran/archy.svg)](https://jitpack.io/#vicfran/archy)
+archy is a lightweight library which uses [kotlin extension functions](https://kotlinlang.org/docs/reference/extensions.html) to make the use of [Realm](https://realm.io/) more easy and secure, and fun!
 
 ## Using alpha versions
 
