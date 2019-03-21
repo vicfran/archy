@@ -18,6 +18,6 @@ allprojects {
 }
 
 dependencies {
-  implementation 'com.github.vicfran:archy:v0.1.0-alpha'
+  implementation 'com.github.vicfran:archy:vX.Y.Z-alpha'
 }
 ```
