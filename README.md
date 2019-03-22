@@ -1,4 +1,4 @@
-# archy [![Build Status](https://travis-ci.com/vicfran/archy.svg?branch=dev)](https://travis-ci.com/vicfran/archy) [![Release](https://jitpack.io/v/vicfran/archy.svg)](https://jitpack.io/#vicfran/archy) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![codecov](https://codecov.io/gh/vicfran/archy/branch/dev/graph/badge.svg)](https://codecov.io/gh/vicfran/archy)
+# archy [![Build Status](https://travis-ci.com/vicfran/archy.svg?branch=dev)](https://travis-ci.com/vicfran/archy) [![Release](https://jitpack.io/v/vicfran/archy.svg)](https://jitpack.io/#vicfran/archy) [![codecov](https://codecov.io/gh/vicfran/archy/branch/dev/graph/badge.svg)](https://codecov.io/gh/vicfran/archy) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 archy is a lightweight library which uses [kotlin extension functions](https://kotlinlang.org/docs/reference/extensions.html) to make the use of [Realm](https://realm.io/) mobile database more easy and secure, and fun!
 
 ## Using alpha versions
