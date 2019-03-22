@@ -47,4 +47,5 @@ script:
   - ./gradlew :archy:assembleDebug :archy:assembleDebugAndroidTest :archy:connectedAndroidTest :archy:ConnectedCheck
 
 after_success:
+  - ./gradlew jacocoTestReport
   - bash <(curl -s https://codecov.io/bash)
