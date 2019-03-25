@@ -22,10 +22,13 @@ At this moment, with **archy** you can do these Realm operations as easy as you 
 ``` kotlin
 val aCat = CatRealmObject("Newton", 4.5f, 2, false)
 aCat.save()
+```
 
+``` kotlin
 val otherCat = CatRealmObject("Turing", 5f, 2, false)
 val oneMoreCat = CatRealmObject("Einstein", 7f, 2, true)
 val cats = listOf(aCat, otherCat, oneMoreCat)
+
 cats.save()
 ```
 
@@ -33,7 +36,9 @@ cats.save()
 ``` kotlin
 allOf<CatRealmObject>()
 allOf<CatRealmObject>("eyes", 2)
+```
 
+``` kotlin
 firstOf<CatRealmObject>()
 firstOf<CatRealmObject>("name", "Newton")
 ```
