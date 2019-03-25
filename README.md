@@ -51,6 +51,7 @@ deleteAllFromRealm()
 ## Use of alpha versions
 If you are brave enough to follow alpha development of archy that has not been packaged in an official release yet, you can use a **-alpha** release of the current development version of archy via [Gradle](https://gradle.org/), available on [JitPack](https://jitpack.io/#vicfran/archy)
 
+**project** build.gradle
 ```groovy
 allprojects {
   repositories {
@@ -59,7 +60,10 @@ allprojects {
     maven { url "https://jitpack.io" }
   }
 }
+```
 
+**app** build.gradle
+``` groovy
 dependencies {
   implementation 'com.github.vicfran:archy:vX.Y.Z-alpha'
 }
