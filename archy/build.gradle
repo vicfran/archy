@@ -21,19 +21,19 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug {
+        /*debug {
             testCoverageEnabled true
-        }
+        }*/
     }
 }
 
-jacoco {
+/*jacoco {
     toolVersion = "0.8.1"
-}
+}*/
 
-//tasks.withType(Test) {
-//    jacoco.includeNoLocationClasses = true
-//}
+/*tasks.withType(Test) {
+    jacoco.includeNoLocationClasses = true
+}*/
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
