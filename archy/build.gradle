@@ -27,13 +27,13 @@ android {
     }
 }
 
-/*jacoco {
+jacoco {
     toolVersion = "0.8.1"
-}*/
+}
 
-/*tasks.withType(Test) {
+tasks.withType(Test) {
     jacoco.includeNoLocationClasses = true
-}*/
+}
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
 
