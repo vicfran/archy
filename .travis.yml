@@ -19,7 +19,7 @@ env:
 
 android:
   licenses:
-  - android-sdk-preview-license-.
+  - android-sdk-preview-license-.+
   - android-sdk-license-.+
   - google-gdk-license-.+
   components:
