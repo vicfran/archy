@@ -42,7 +42,7 @@ import org.junit.runner.RunWith
             save()
         }
 
-        assertThreeCats()
+        assertCats(3)
 
         deleteAllFromRealm()
         assertTrue(allOf<Cat>().isRight())
@@ -56,7 +56,7 @@ import org.junit.runner.RunWith
             Cat("Einstein", 5.5f, 2, false)
         ).save()
 
-        assertThreeCats()
+        assertCats(3)
     }
 
     @Test fun given_realm_list_of_realm_objects_when_saving_all_then_they_are_saved_successfully() {
@@ -65,7 +65,7 @@ import org.junit.runner.RunWith
             Cat("Copernico", 8.5f, 2, true),
             Cat("Einstein", 5.5f, 2, false)).save()
 
-        assertThreeCats()
+        assertCats(3)
     }
 
     @Test fun given_realm_object_when_getting_by_first_then_return_it() {
@@ -98,11 +98,34 @@ import org.junit.runner.RunWith
         firstOf<Cat>("isOld", false).map { it.assert() }
     }
 
-    private fun assertThreeCats() {
-        assertTrue(allOf<Cat>().isRight())
-        assertTrue(allOf<Cat>().map { it.isNotEmpty() }.getOrNull() ?: false)
-        assertTrue(3 == allOf<Cat>().getOrNull()?.size)
+    @Test fun given_two_realm_objects_delete_first() {
+        with (givenCat) {
+            save()
+            save()
+            save()
+        }
+
+        deleteFirst<Cat>("name", "Newton")
+
+        assertCats(2)
     }
 
+    @Test fun given_two_realm_objects_delete_oldest() {
+        with (givenCat) {
+            save()
+            save()
+            save()
+        }
+
+        deleteFirst<Cat>()
+
+        assertCats(2)
+    }
+
+    private fun assertCats(quantity: Int) {
+        assertTrue(allOf<Cat>().isRight())
+        assertTrue(allOf<Cat>().map { it.isNotEmpty() }.getOrNull() ?: false)
+        assertTrue(quantity == allOf<Cat>().getOrNull()?.size)
+    }
 
 }

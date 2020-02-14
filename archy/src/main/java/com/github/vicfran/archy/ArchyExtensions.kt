@@ -7,6 +7,7 @@ import io.realm.RealmList
 import io.realm.RealmModel
 import io.realm.RealmQuery
 import io.realm.RealmSchema
+import io.realm.kotlin.deleteFromRealm
 
 fun RealmModel.save() {
     realm().map { realm -> with(realm) { executeTransaction {
@@ -29,6 +30,16 @@ fun <T: RealmList<RealmModel>> T.save() {
         close() }
     }
 }
+
+inline fun <reified T : RealmModel> deleteFirst(field: String, value: String): Either<Exception, Unit> = realm().map{ realm -> with (realm) { executeTransaction {
+    where(T::class.java).has(field, value).findFirst()?.deleteFromRealm()
+    close()
+} } }
+
+inline fun <reified T : RealmModel> deleteFirst(): Either<Exception, Unit> = realm().map{ realm -> with (realm) { executeTransaction {
+    where(T::class.java).findFirst()?.deleteFromRealm()
+    close()
+} } }
 
 inline fun <reified T : RealmModel> allOf(): Either<Exception, List<T>> = realm().map{ realm -> with (realm) {
     val result = copyFromRealm(where(T::class.java).findAll())
@@ -99,8 +110,8 @@ fun <T: RealmModel> RealmQuery<T>.has(field: String, value: Float) : RealmQuery<
 fun <T: RealmModel> RealmQuery<T>.has(field: String, value: Boolean) : RealmQuery<T> = this.equalTo(field, value)
 
 fun deleteAllFromRealm(): Either<Exception, Unit> = realm().map { realm -> with (realm) { executeTransaction {
-    deleteAll() } }
-}
+    deleteAll()
+} } }
 
 fun realm() = try {
     val defaultInstance = Realm.getDefaultInstance()
